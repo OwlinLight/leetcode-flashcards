@@ -1,0 +1,1 @@
+This repo used for vibe coding with claude code
