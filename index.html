@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeetCode Flashcards - Spaced Repetition</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <h1><i class="fas fa-code"></i> LeetCode Flashcards</h1>
+            <div class="header-controls">
+                <button id="calendarBtn" class="btn btn-secondary">
+                    <i class="fas fa-calendar"></i> Schedule
+                </button>
+                <button id="addCardBtn" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Add Card
+                </button>
+            </div>
+        </header>
+
+        <div class="calendar-container" id="calendarContainer">
+            <div class="calendar-header">
+                <button id="prevMonth"><i class="fas fa-chevron-left"></i></button>
+                <h3 id="currentMonth"></h3>
+                <button id="nextMonth"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="calendar-grid" id="calendarGrid"></div>
+            <div class="calendar-stats">
+                <div class="stat">
+                    <span class="stat-label">Today's Cards:</span>
+                    <span class="stat-value" id="todayCards">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Due This Week:</span>
+                    <span class="stat-value" id="weekCards">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label for="difficultyFilter">Difficulty:</label>
+                <select id="difficultyFilter">
+                    <option value="all">All</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="statusFilter">Status:</label>
+                <select id="statusFilter">
+                    <option value="all">All</option>
+                    <option value="new">New</option>
+                    <option value="learning">Learning</option>
+                    <option value="review">Review</option>
+                    <option value="mastered">Mastered</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="dateFilter">Due Date:</label>
+                <input type="date" id="dateFilter">
+            </div>
+            <button id="clearFilters" class="btn btn-secondary">Clear</button>
+        </div>
+
+        <div class="cards-container" id="cardsContainer">
+            <div class="waterfall-grid" id="waterfallGrid"></div>
+        </div>
+
+        <div class="modal" id="cardModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Study Card</h3>
+                    <button class="close-btn" id="closeModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-study">
+                        <div class="problem-section">
+                            <h4>Problem</h4>
+                            <p id="problemText"></p>
+                        </div>
+                        <div class="solution-section" id="solutionSection" style="display: none;">
+                            <h4>Solution</h4>
+                            <pre id="solutionCode"></pre>
+                            <p id="solutionExplanation"></p>
+                        </div>
+                        <div class="study-controls">
+                            <button id="showSolution" class="btn btn-primary">Show Solution</button>
+                            <div class="difficulty-buttons" id="difficultyButtons" style="display: none;">
+                                <button class="btn btn-danger" data-difficulty="again">Again</button>
+                                <button class="btn btn-warning" data-difficulty="hard">Hard</button>
+                                <button class="btn btn-success" data-difficulty="good">Good</button>
+                                <button class="btn btn-info" data-difficulty="easy">Easy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="addCardModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Add New Card</h3>
+                    <button class="close-btn" id="closeAddModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="addCardForm">
+                        <div class="form-group">
+                            <label for="cardTitle">Problem Title</label>
+                            <input type="text" id="cardTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardProblem">Problem Description</label>
+                            <textarea id="cardProblem" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardSolution">Solution Code</label>
+                            <textarea id="cardSolution" rows="6" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardExplanation">Explanation</label>
+                            <textarea id="cardExplanation" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardDifficulty">Difficulty</label>
+                            <select id="cardDifficulty" required>
+                                <option value="easy">Easy</option>
+                                <option value="medium">Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardTags">Tags (comma separated)</label>
+                            <input type="text" id="cardTags" placeholder="array, two-pointers, binary-search">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Card</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
